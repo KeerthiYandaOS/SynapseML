@@ -8,10 +8,10 @@ import scala.xml.transform.{RewriteRule, RuleTransformer}
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 
 val condaEnvName = "synapseml"
-val sparkVersion = "3.2.3"
+val sparkVersion = "3.4.1"
 name := "synapseml"
 ThisBuild / organization := "com.microsoft.azure"
-ThisBuild / scalaVersion := "2.12.15"
+ThisBuild / scalaVersion := "2.12.17"
 
 val scalaMajorVersion = 2.12
 
@@ -27,6 +27,7 @@ val coreDependencies = Seq(
   "org.apache.spark" %% "spark-tags" % sparkVersion % "test",
   "org.scalatest" %% "scalatest" % "3.2.14" % "test")
 val extraDependencies = Seq(
+  "commons-lang" % "commons-lang" % "2.6",
   "org.scalactic" %% "scalactic" % "3.2.14",
   "io.spray" %% "spray-json" % "1.3.5",
   "com.jcraft" % "jsch" % "0.1.54",
@@ -36,7 +37,7 @@ val extraDependencies = Seq(
   // Although breeze 1.2 is already provided by Spark, this is needed for Azure Synapse Spark 3.2 pools.
   // Otherwise a NoSuchMethodError will be thrown by interpretability code. This problem only happens
   // to Azure Synapse Spark 3.2 pools.
-  "org.scalanlp" %% "breeze" % "1.2"
+  "org.scalanlp" %% "breeze" % "2.1.0"
 ).map(d => d excludeAll (excludes: _*))
 val dependencies = coreDependencies ++ extraDependencies
 
